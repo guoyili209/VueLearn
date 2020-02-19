@@ -6,7 +6,9 @@
     <!-- <router-link v-bind:to="{path:'/profile',query:{name:'xyz',age:18,height:1.87}}" tag="button">档案</router-link> -->
     <button @click="userClick()">用户</button>
     <button @click="profileClick()">档案</button>
-    <router-view />
+    <keep-alive>
+      <router-view />
+    </keep-alive>
   </div>
 </template>
 
@@ -32,6 +34,15 @@ export default {
         }
       });
     }
+  },
+  created(){ //当前对象被初始化是调用
+
+  },
+  computed(){ //被安装到dom树上的时候调用
+
+  },
+  updated(){ //被刷新的时候调用
+
   }
 };
 </script>

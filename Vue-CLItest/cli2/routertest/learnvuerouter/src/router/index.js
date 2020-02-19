@@ -26,11 +26,14 @@ const routes=[
   {
     path:'/home',
     component:Home,
+    meta:{
+      title:'首页'
+    },
     children:[
-      {
-        path:'',
-        redirect:'news'//重定向
-      },
+      // {
+      //   path:'',
+      //   redirect:'news'//重定向
+      // },
       {
         path:'news',
         component:HomeNews
@@ -43,15 +46,24 @@ const routes=[
   },
   {
     path:'/about',
-    component:About
+    component:About,
+    meta:{
+      title:'关于'
+    }
   },
   {
     path:'/user/:userId',
-    component:User
+    component:User,
+    meta:{
+      title:'用户'
+    }
   },
   {
     path:'/profile',
-    component:Profile
+    component:Profile,
+    meta:{
+      title:'档案'
+    }
   }
 ]
 const router=new VueRouter({
@@ -59,4 +71,19 @@ const router=new VueRouter({
   routes,
   mode:'history'
 })
+//导航守卫
+router.beforeEach((to,from,next)=>{
+  if(to.matched[0]){
+      //从from跳转到to
+    
+  }
+  document.title = to.matched[0].meta.title;
+  next();
+})
+
+//后置钩子（hook）
+router.afterEach((to,from)=>{
+  console.log('after each')
+})
+
 export default router
