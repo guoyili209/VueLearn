@@ -11,7 +11,8 @@
     <div v-else>
       <slot name="item-icon-active"></slot>
     </div>
-    <div :class="{active:isActive}">
+    <!-- <div :class="{active:isActive}"> -->
+    <div :style="activeStyle">
       <slot name="item-text"></slot>
     </div>
   </div>
@@ -20,19 +21,31 @@
 <script scoped>
 export default {
   name: "TabBarItem",
-  props:{
-      link:String
+  props: {
+    link: String,
+    activeColor: {
+      type: String,
+      default: "red"
+    }
   },
   data() {
-    return { 
-        isActive: true
+    return {
+        // isActive: true
      };
   },
-  methods:{
-      itemClick(){
-          this.$router.replace(this.link);
-        //   this.$router.push()
-      }
+  computed: {
+    isActive() {
+      return this.$route.path.indexOf(this.link) != -1;
+    },
+    activeStyle() {
+      return this.isActive ? { color: this.activeColor } : {};
+    }
+  },
+  methods: {
+    itemClick() {
+      this.$router.replace(this.link);
+      //   this.$router.push()
+    }
   }
 };
 </script>
@@ -51,7 +64,7 @@ export default {
   margin-bottom: 2px;
 }
 
-.active {
+/* .active {
   color: red;
-}
+} */
 </style>

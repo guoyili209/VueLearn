@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import TabBar from '../components/tabbar/TabBar'
 
 const Home=()=>import('../views/home/Home')
 const Category=()=>import('../views/category/Category')
