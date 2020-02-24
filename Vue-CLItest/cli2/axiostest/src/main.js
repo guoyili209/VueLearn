@@ -13,4 +13,19 @@ new Vue({
   render: h => h(App)
 })
 
-axios()
+const instance1=axios.create({
+
+})
+const instance2=axios.create({
+
+})
+
+import {request} from './network/request'
+
+request({
+  url:''
+}).then(res=>{
+
+}).catch(err=>{
+  
+})
