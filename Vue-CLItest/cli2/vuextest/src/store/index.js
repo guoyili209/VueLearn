@@ -1,36 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import {INCREMENT} from './mutations-types'
+import action from './actions'
+import moduleA from './modules/moudelA'
+import actions from './actions'
 
 Vue.use(Vuex)
 
-const moduleA={
-    state:{
-        name:'xxx'
-    },
-    getters:{
-        getName(state){
-            return state.name;
-        }
-    },
-    mutations:{
-        setName(state,payload){
-            state.name=payload;
-        }
-    },
-    actions: {
-        // 对于模块内部的 action，局部状态通过 context.state 暴露出来，根节点状态则为 context.rootState
-        modifyName ({ state, commit, rootState },payload) {
-            return new Promise((resovle,reject)=>{
-                setTimeout(()=>{
-                    commit('setName',payload);
-                    resovle('名字修改成功');
-                },3000)
-                
-            })
-        }
-      }
-}
 const moduleB={
     state:{
         name:'yyy'
@@ -57,17 +33,7 @@ const store = new Vuex.Store({
         }
     },
     //异步方法
-    actions:{
-        updateInfo(context,payload){
-            return new Promise((resovle,reject)=>{
-                setTimeout(()=>{
-                    context.commit('addCount',100);
-                    resovle('执行成功');
-                },2000)
-                
-            })
-        }
-    },
+    actions:actions,
     //相当于计算属性compute
     getters:{
         counter(state){
